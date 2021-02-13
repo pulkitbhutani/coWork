@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-workspaces',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./workspaces.page.scss'],
 })
 export class WorkspacesPage implements OnInit {
+  public workSpaces = [];
 
-  constructor() { }
+  constructor(private afDB: AngularFireDatabase) { }
 
   ngOnInit() {
+    this.getWorkSpaces().valueChanges().subscribe(
+      (result: any) => {
+        this.workSpaces = result;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getWorkSpaces() {
+    return this.afDB.list('workspaces');
   }
 
 }
