@@ -1,0 +1,7 @@
+{
+  "name": "coWork",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
